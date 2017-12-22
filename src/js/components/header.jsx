@@ -3,11 +3,10 @@ import Grid from 'material-ui/Grid';
 
 export default class Header extends Component {
   render() {
-    return(
+    return (
       <Grid
         container
-        className="header-container"
-        >
+        className="header-container">
         <p className="header-text">Staff</p>
       </Grid>
     );
