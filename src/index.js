@@ -1,23 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route } from 'react-router-dom';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { createBrowserHistory } from 'history';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import './css/app.scss';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 
+import Header from './js/components/header';
 import Main from './js/components/main-page/index.jsx';
-import reducer from './js/reducers/index.js';
+import CreateCompany from './js/components/company/create';
+import CreateStaff from './js/components/staff/create.jsx';
+import SignUp from './js/components/sign/up.jsx';
+import SignIn from './js/components/sign/in.jsx';
 
-const store = createStore(reducer),
-  history = syncHistoryWithStore(createBrowserHistory(), store);
+import reducer from './js/reducers/index.js';
+import localStorageLoad from './js/middleware/local-storage-load';
+
+const store = createStore(reducer, applyMiddleware(localStorageLoad));
+
+store.dispatch({ type: 'INIT' });
 
 render(
   <Provider store={ store }>
-      <Main />
+    <Router>
+      <div>
+        <Header />
+        <Route exact path="/" component={Main} />
+        <Route path="/company-create" component={CreateCompany} />
+        <Route path="/staff-create" component={CreateStaff} />
+        <Route path="/sign-up" component={SignUp} />
+        <Route path="/sign-in" component={SignIn} />
+      </div>
+    </Router>
   </Provider>,
   document.getElementById('app')
 );

@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
-import Grid from 'material-ui/Grid';
+import { Grid } from 'material-ui';
 
-import Header from '../header';
 import Search from '../search';
-import CompanyList from '../company-list';
+import CompanyList from '../company/list';
 
 export default class Main extends Component {
   render() {
-    return(
+    return (
       <div className="page-container">
-        <Header />
         <Grid className="container-for-search"
           container>
-          <Search />
-          <CompanyList />
+          <Grid container item
+            className="menu-block"
+            xs={2}>
+            {/* for menu */}
+          </Grid>
+          <Grid container item
+            className="search-block"
+            xs={8}>
+            <Search />
+            <CompanyList />
+          </Grid>
         </Grid>
       </div>
     );
