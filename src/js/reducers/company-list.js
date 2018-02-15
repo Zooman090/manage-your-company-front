@@ -7,11 +7,11 @@ const list = [{
 
 const company = (state = list, action) => {
   switch (action.type) {
-    case 'REFRESH_COMPANY':
-      return [ ...action.companyList ];
-    default:
-      return [ ...state ]; 
+  case 'REFRESH_COMPANY':
+    return [ ...action.payload ];
+  default:
+    return [ ...state ];
   }
-}
+};
 
 export default company;

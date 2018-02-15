@@ -37,7 +37,8 @@
     "module": false,
     "process": false,
     "Stripe": false,
-    "Cookies": false
+    "Cookies": false,
+    "__dirname": true
   },
 
   "rules": {

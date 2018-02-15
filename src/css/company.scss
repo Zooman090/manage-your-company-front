@@ -1,0 +1,22 @@
+.company-list-container {
+  .staff-button {
+    flex: 0 1 40%;
+  }
+
+  .company-info {
+    padding: em(10px) em(35px);
+  }
+}
+
+div.create-container {
+  margin-top: em(80px);
+  width: 50%;
+  min-width: 300px;
+
+  .create-btn {
+    margin-top: em(15px);
+    margin-left: em(15px);
+    font-weight: 600;
+    width: em(150px);
+  }
+}

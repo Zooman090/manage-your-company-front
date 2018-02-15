@@ -1,12 +1,21 @@
 @function em($px, $font: 14px) {
   @return $px / $font * 1em; 
 }
+
 * {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
+  font-family: 'Robot';
 }
-.page-container > .MuiGrid-typeContainer-1 {
+
+div.MuiGrid-typeContainer-1 {
   margin: 0;
+  width: 100%;
+}
+
+.mt-20 {
+  margin-top: 20px!important;
 }

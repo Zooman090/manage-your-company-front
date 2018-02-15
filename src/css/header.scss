@@ -1,4 +1,51 @@
-.page-container > .header-container {
+ div.header-container {
   margin: 0;
-  width: 100vw;
+  width: 100%;
+  background-color: $base-color;
+  flex-wrap: nowrap;
+
+  .header-text {
+    margin-left: em(80px);
+    font-size: em(24px);
+    color: #fff;
+    transform: rotate(-30deg);
+  }
+
+  .sign-container {
+    margin-right: em(50px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #fff;
+    flex: 1 1 100%;
+  }
+
+  .sign-in-link {
+    color: #fff;    
+    margin-right: em(5px);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .divider {
+    color: #fff;    
+    margin-right: em(5px);
+  }
+
+  .sign-up-link {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .header-menu {
+    flex: 1 1 100%;
+    max-width: 100%;
+    align-items: flex-end;
+  }
+}
+
+.header-menu__menu-item {
+  outline: none;
+  text-decoration: none;
 }
