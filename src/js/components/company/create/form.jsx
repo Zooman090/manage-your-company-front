@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
-import { Button, Grid } from 'material-ui';
+import { Button, Grid, TextField } from 'material-ui';
 
 import serverRoute from '../../../../config/route';
 import { jsonFetch } from '../../helper/request';
-
-import Input from '../../input/input';
 
 export default class CreateForm extends Component {
   constructor(props) {
@@ -38,10 +36,19 @@ export default class CreateForm extends Component {
 
     return (
       <Grid item className="create-container">
-        <form onSubmit={this.onSubmit}>
-          <Input label='Name' name='name' value={name} onChange={event => this.setState({ name: event.target.value }) } />
-          <Input label='Type' name='type' value={type} onChange={event => this.setState({ type: event.target.value }) } />
-          <Input label='Address' name='address' value={address} onChange={event => this.setState({ address: event.target.value }) } />
+        <form className="layout-column mlr-15" onSubmit={this.onSubmit}>
+          <TextField label='Name' name='name'
+            value={name}
+            onChange={event => this.setState({ name: event.target.value }) } />
+          <TextField label='Type' name='type'
+            className="mt-20"
+            value={type}
+            onChange={event => this.setState({ type: event.target.value }) } />
+          <TextField label='Address' name='address'
+            className="mt-20"
+            value={address}
+            onChange={event => this.setState({ address: event.target.value }) } />
+
           <Button type='submit' className="create-btn" raised='true' color='primary'>Create</Button>
         </form>
       </Grid>

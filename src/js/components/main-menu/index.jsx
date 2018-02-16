@@ -54,6 +54,7 @@ class GlobalMenu extends Component {
         container>
         <div className="menu-container">
           <Button
+            className="header-menu__point"
             aria-owns={anchorEl ? 'simple-menu' : null}
             aria-haspopup="true"
             onClick={this.handleClick}

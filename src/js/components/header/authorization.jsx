@@ -40,7 +40,7 @@ class Authorization extends Component {
 
   authorized() {
     return <div className="sign-container">
-      <h3 onClick={this.signOut}>Sign Out</h3>
+      <div onClick={this.signOut}>Sign Out</div>
     </div>;
   }
 

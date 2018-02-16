@@ -10,7 +10,7 @@ class Company extends Component {
 
     this.state = {
       staffList: [],
-      show: false
+      showStaffList: false
     };
 
     this.showStaff = this.showStaff.bind(this);
@@ -26,23 +26,23 @@ class Company extends Component {
     fetch(url, options)
       .then(response => {
         response.json()
-          .then(({ staffs = [] }) => this.setState({ staffList: staffs, show: true }));
+          .then(({ staffs = [] }) => this.setState({ staffList: staffs, showStaffList: true }));
       });
   }
 
   get staffList() {
-    const { staffList, show } = this.state;
+    const { staffList, showStaffList } = this.state;
 
-    return show ? <Grid container className="staff-list">
+    return showStaffList ? <Grid container className="staff-list">
       <StaffList staffs={ staffList }/>
     </Grid> : null;
   }
 
   get staffShowButton() {
-    const { show } = this.state;
+    const { showStaffList } = this.state;
 
-    return !show ? <Grid container justify={'center'}>
-      <Button className="staff-button"
+    return !showStaffList ? <Grid container justify={'center'}>
+      <Button className="staff-button mt-20"
         target="_blank"
         onClick={this.showStaff}
       >staff</Button>
@@ -50,26 +50,32 @@ class Company extends Component {
   }
 
   get staffHideButton() {
-    const { show } = this.state;
+    const { showStaffList } = this.state;
 
-    return show ? <Grid container justify={'center'}>
-      <Button className="staff-button"
+    return showStaffList ? <Grid container justify={'center'}>
+      <Button className="staff-button mt-20"
         target="_blank"
-        onClick={() => this.setState({ show: false })}
+        onClick={() => this.setState({ showStaffList: false })}
       >hide staff</Button>
     </Grid> : null;
   }
 
   render() {
-    const { name, type, address } = this.props;
+    const { name, type, address } = this.props,
+      { showStaffList } = this.state,
+      customClass = `company-info ${showStaffList ? 'full-height' : 'minimal-height'}`;
 
-    return <Grid container className="company-info"
+    return <Grid container className={customClass}
       direction={'column'}>
-      <p>{ name }</p>
-      <p>{ type }</p>
-      <p>{ address }</p>
+      <div className="company-detail-container">
+        <p className="company-detail-container__text">{ name }</p>
+        <p className="company-detail-container__text">Type: <span className="company-detail-container__point">{ type }</span></p>
+        <p className="company-detail-container__text">Address: <span className="company-detail-container__point">{ address }</span></p>
+      </div>
+      <div className="staff-container">
+        { this.staffList }
+      </div>
       { this.staffShowButton }
-      { this.staffList }
       { this.staffHideButton }
     </Grid>;
   }

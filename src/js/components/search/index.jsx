@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid } from 'material-ui';
+import { Grid, TextField } from 'material-ui';
 import { connect } from 'react-redux';
 
 import { saveCompanySearchParametrs } from '../../actions/search';
@@ -50,10 +50,14 @@ class Search extends Component {
         alignItems={'center'}
         className="search-container">
         <Grid item xs={8}>
-          <Input type="text" name="search" value={keyword} onChange={this.changeKeyword}/>
+          <TextField label="search" type='text' name="search"
+            className="width-100-percent"
+            value={keyword}
+            onChange={this.changeKeyword} />
         </Grid>
         <Grid item xs={4}>
           <Selector item label='search by' id='company-select'
+            className='width-100-percent'
             value={selectedType}
             onChange={this.selectFilterType}
             items={searchTypes} />

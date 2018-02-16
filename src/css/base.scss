@@ -1,3 +1,5 @@
+$main-bcg: rgb(237, 238, 240);
+
 @function em($px, $font: 14px) {
   @return $px / $font * 1em; 
 }
@@ -9,6 +11,7 @@
 body {
   margin: 0;
   font-family: 'Robot';
+  background-color: $main-bcg;
 }
 
 div.MuiGrid-typeContainer-1 {
@@ -18,4 +21,17 @@ div.MuiGrid-typeContainer-1 {
 
 .mt-20 {
   margin-top: 20px!important;
+}
+
+.mlr-15 {
+  margin-left: 15px!important;
+  margin-right: 15px!important;  
+}
+
+.width-100-percent {
+  width: 100%;
+}
+
+.decoration-none {
+  text-decoration: none;
 }

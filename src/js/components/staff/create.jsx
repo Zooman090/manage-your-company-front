@@ -67,28 +67,29 @@ class CreateStaff extends Component {
     return (
       <Grid container justify={'center'} alignItems={'center'}>
         <Grid item className="create-container"
-          lg={4} sm={8} xs={12}>
+          lg={4} sm={6} xs={12}>
           <form className="layout-column" onSubmit={this.onSubmit}>
             <TextField label='Full Name' name='name'
+              className="mlr-15"
               value={name}
               onChange={event => this.setState({ name: event.target.value })} />
             <TextField label='Position' name='position'
-              className="mt-20"
+              className="mt-20 mlr-15"
               value={position}
               onChange={event => this.setState({ position: event.target.value })} />
             <TextField label='Experience' name='experience'
-              className="mt-20"
+              className="mt-20 mlr-15"
               value={experience}
               onChange={event => this.setState({ experience: event.target.value })} />
             <TextField label='Skills' name='skills'
-              className="mt-20"
+              className="mt-20 mlr-15"
               value={skills}
               onChange={event => this.setState({ skills: event.target.value })} />
             <Selector label='Company' id='company-select'
               value={selectedCompany}
               onChange={this.selectChange}
               items={companiesList}
-              className='mt-20'/>
+              className='mt-20 mlr-15'/>
 
             <Button type='submit' className="create-btn" raised={'true'} color='primary'>
               Create

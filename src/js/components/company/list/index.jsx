@@ -12,7 +12,11 @@ import Company from './company';
 
 class CompaniesList extends Component {
   componentDidMount() {
-    fetch(`${serverRoute}/company/get`)
+    const options = {
+      credentials: 'include'
+    };
+
+    fetch(`${serverRoute}/company/get`, options)
       .then(response => {
         response.json()
           .then(companies => {
