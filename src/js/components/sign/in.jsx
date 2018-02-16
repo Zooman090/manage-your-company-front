@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Grid } from 'material-ui';
+import { Button, Grid, TextField } from 'material-ui';
 import { connect } from 'react-redux';
 
 import serverRoute, { siteUrl } from '../../../config/route.js';
 import { securityFetch } from '../helper/request';
-
-import Input from '../input/input.jsx';
 
 import { userAuthorization } from '../../actions/user.js';
 
@@ -69,14 +67,14 @@ class SignIn extends Component {
 
     return (
       <Grid container className="sign-in-container">
-        <form onSubmit={this.signIn}>
-          <Input label="Email" type='email' name='email'
+        <form className="sign-in-form layout-column" onSubmit={this.signIn}>
+          <TextField label="Email" type='email' name='email'
             value={email}
             onChange={this.typeEmail} />
-          <Input label="Password" type='password' name='password'
+          <TextField label="Password" type='password' name='password'
             value={password}
             onChange={this.typePassword} />
-          <Button className="sign-in-btn" type='submit' color='primary' raised="true">
+          <Button className="sign-in-btn mt-20" type='submit' color='primary' raised="true">
             Sign In
           </Button>
         </form>

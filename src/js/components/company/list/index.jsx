@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import { Grid, Button } from 'material-ui';
-import { Link } from 'react-router-dom';
+import { Grid } from 'material-ui';
 import { connect } from 'react-redux';
+import { createSelector } from 'reselect';
 
-import { refreshCompanyList } from '../../../actions/company';
+import { refreshCompaniesList } from '../../../actions/company';
 import { showCurrentStaff } from '../../../actions/staff';
 
 import serverRoute from '../../../../config/route';
 
 import Company from './company';
 
-class CompanyList extends Component {
+class CompaniesList extends Component {
   componentDidMount() {
-    fetch(`${serverRoute}/company/get`)
+    const options = {
+      credentials: 'include'
+    };
+
+    fetch(`${serverRoute}/company/get`, options)
       .then(response => {
         response.json()
           .then(companies => {
@@ -22,9 +26,9 @@ class CompanyList extends Component {
   }
 
   list() {
-    const { companyList } = this.props;
+    const { companiesList } = this.props;
 
-    return companyList.map((company, index) => <Company {...company} index={index} />);
+    return companiesList.map((company, index) => <Company key={`${index}-company`} {...company} />);
   }
 
   render() {
@@ -36,17 +40,23 @@ class CompanyList extends Component {
   }
 }
 
+const companiesList = ({ companiesList }) => companiesList,
+  searchParameters = ({ search }) => search,
+  filteredCompanies = createSelector(
+    [companiesList, searchParameters],
+    (companies, { keyword, filterBy }) => companies.filter(company => company[filterBy].toLocaleLowerCase().includes(keyword))
+  );
+
 const mapState = state => ({
-    companyList: state.companyList,
-    staffList: state.staffList
+    companiesList: filteredCompanies(state)
   }),
   mapDispatch = dispatch => ({
-    refreshCompany: (companyList) => {
-      dispatch(refreshCompanyList(companyList));
+    refreshCompany: (companiesList) => {
+      dispatch(refreshCompaniesList(companiesList));
     },
     saveStaff: staff => {
       dispatch(showCurrentStaff(staff));
     }
   });
 
-export default connect(mapState, mapDispatch)(CompanyList);
+export default connect(mapState, mapDispatch)(CompaniesList);

@@ -1,4 +1,5 @@
-export const refreshCompanyList = companyList => ({
+export const refreshCompaniesList = companiesList => ({
   type: 'REFRESH_COMPANY',
-  payload: companyList
+  payload: companiesList
 });
+
