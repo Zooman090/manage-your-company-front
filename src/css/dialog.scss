@@ -1,0 +1,38 @@
+$errorBcgColor: #ce352c;
+$simpleBcgColor: rgba(79, 79, 209, 0.83);
+
+.dialog-container {
+  background-color: yellow;
+  color: #fff;
+  font-family: 'Lato';
+  position: fixed;
+  top: 100px;
+  opacity: 1;
+  transition: 1s linear;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hidden-dialog-container {
+  top: -110%;
+  opacity: 0;
+  transition: 0.5s linear;
+}
+
+.simple-dialog {
+  background-color: $simpleBcgColor;
+  padding: 20px;
+}
+
+.error-dialog {
+  padding: 20px;
+  background-color: $errorBcgColor;
+  transition: 1s linear;
+}
+
+.simple-dialog__message,
+.error-dialog__header {
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 1px;
+}

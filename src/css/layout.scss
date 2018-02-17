@@ -3,6 +3,13 @@
   flex-direction: column;
 }
 
+.layout-inline-column {
+  display: inline-flex;
+  flex-direction: column;
+}
+
 .layout {
   display: flex;
 }
+
+
