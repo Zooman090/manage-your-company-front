@@ -26,14 +26,14 @@ class Authorization extends Component {
       .then(response => {
         response.json()
           .then(() => {
-            const { history } = this.props,
+            const { history, saveUserParameters } = this.props,
               userParameters = { isSign: false, role: 'guest' };
 
             localStorage.setItem('myc', '');
 
             history.push('/');
 
-            this.props.saveUserParameters(userParameters);
+            saveUserParameters(userParameters);
           });
       });
   }

@@ -16,7 +16,9 @@ const user = (state = defaultUser, { type, payload }) => {
       ...payload
     };
   default:
-    return state;
+    return {
+      ...state
+    };
   }
 };
 

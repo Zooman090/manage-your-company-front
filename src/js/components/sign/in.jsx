@@ -39,13 +39,13 @@ class SignIn extends Component {
         response.json()
           .then(({ role = 'guest' }) => {
             const userParameters = { role, isSign: true },
-              { history } = this.props;
+              { history, saveUserParameters } = this.props;
 
             localStorage.setItem('myc', JSON.stringify(userParameters));
 
             history.push('/');
 
-            this.props.saveUserParameters(userParameters);
+            saveUserParameters(userParameters);
           });
       });
   }

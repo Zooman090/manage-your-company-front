@@ -17,6 +17,8 @@ import CreateStaff from './js/components/staff/create.jsx';
 import SignUp from './js/components/sign/up.jsx';
 import SignIn from './js/components/sign/in.jsx';
 
+import Dialog from './js/components/dialog';
+
 import reducer from './js/reducers/index.js';
 import localStorageLoad from './js/middleware/local-storage-load';
 
@@ -28,6 +30,7 @@ render(
   <Provider store={ store }>
     <Router>
       <div>
+        <Dialog />
         <Header />
         <Route exact path="/" component={Main} />
         <Route path="/company-create" component={CreateCompany} />
