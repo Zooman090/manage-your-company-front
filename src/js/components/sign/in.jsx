@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Button, Grid, TextField } from 'material-ui';
 import { connect } from 'react-redux';
 
-import serverRoute, { siteUrl } from '../../../config/route.js';
-import { securityFetch } from '../helper/request';
+import { serverUrl, siteUrl } from '../../../config/route.js';
+import { securityFetch, checkingStatus } from '../helper/request';
 
 import { userAuthorization } from '../../actions/user.js';
+import { showErrorDialog } from '../../actions/dialog';
 
 class SignIn extends Component {
   constructor(props) {
@@ -23,8 +24,9 @@ class SignIn extends Component {
 
   signIn(event) {
     event.preventDefault();
+
     const { email, password } = this.state,
-      url = `${serverRoute}/sign/in`,
+      url = `${serverUrl}/sign/in`,
       encodeCredentials = window.btoa(`${email}:${password}`),
       options = {
         method: 'POST',
@@ -35,17 +37,24 @@ class SignIn extends Component {
       };
 
     securityFetch(url, options)
-      .then(response => {
-        response.json()
-          .then(({ role = 'guest' }) => {
-            const userParameters = { role, isSign: true },
-              { history, saveUserParameters } = this.props;
+      .then(checkingStatus)
+      .then(({ role = 'guest' }) => {
+        const userParameters = { role, isSign: true },
+          { history, saveUserParameters } = this.props;
 
-            localStorage.setItem('myc', JSON.stringify(userParameters));
+        localStorage.setItem('myc', JSON.stringify(userParameters));
 
-            history.push('/');
+        history.push('/');
 
-            saveUserParameters(userParameters);
+        saveUserParameters(userParameters);
+      })
+      .catch(error => {
+        const headerTitle = 'Sign In Error',
+          { showErrorDialog } = this.props;
+
+        error
+          .then(({ errorMessage }) => {
+            showErrorDialog({ errorMessage, headerTitle });
           });
       });
   }
@@ -87,6 +96,10 @@ const mapState = () => ({}),
   mapDispatch = dispatch => ({
     saveUserParameters: userParameters => {
       dispatch(userAuthorization(userParameters));
+    },
+    showErrorDialog: dialogParameters => {
+      console.log('check');
+      dispatch(showErrorDialog(dialogParameters));
     }
   });
 

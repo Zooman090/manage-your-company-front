@@ -7,15 +7,17 @@ $company-point: rgba(0, 0, 0, 0.5);
     flex: 0 1 40%;
   }
 
-  .company-info {
-    padding: em(10px) em(15px);
-    margin: 0 em(15px);
+  div.company-info {
+    padding: em(10px) em(25px);
     transition: 0.3s linear;
     overflow: hidden;
-    max-height: 220px;
     font-family: $LatoFont;
+    display: inline-flex;
+    flex-grow: 1;
+    flex-shrink: 2;
 
     .company-detail-container {
+      width: 100%;
       border-bottom: 1px solid $bottom-color-light-silver;
     }
 
@@ -36,35 +38,24 @@ $company-point: rgba(0, 0, 0, 0.5);
       color: $black75;
     }
 
-    .pos-relative {
-      position: relative;
-      top: 0;
-    }
+    .staff-container {
+      display: inline-flex;
+      transition: 1s linear;
 
-    &.full-height {
-      max-height: 100%;
-
-      .staff-container {
-        height: 110px;
+      &.show-staff {
         max-height: 100%;
-        overflow: initial;
-        transition: 0.3s linear;    
+        flex-grow: 1;
       }
-    }
 
-    &.minimal-height {
-      max-height: 220px;
-
-      .staff-container {
-        max-height: 1px;
-        height: 0;
-        overflow: hidden;
-        transition: 0.2s linear;      
+      &.hide-staff {
+        max-height: 0;
+        flex-flow: 0;
       }
     }
 
     .staff-info {
       padding-left: 20px;
+      height: 120px;
     }
 
     .staff-info__point-text {

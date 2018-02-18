@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
 import { Button, Grid, TextField } from 'material-ui';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { jsonFetch } from '../helper/request';
-import serverRoute from '../../../config/route';
+import { jsonFetch, checkingStatus } from '../helper/request';
+import { serverUrl } from '../../../config/route';
+
+import { showErrorDialog, showSimpleDialog } from '../../actions/dialog';
 
 import Selector from '../selector';
+
+const EMPTY_FORM_STATE = {
+  name: '',
+  position: '',
+  experience: '',
+  skills: '',
+  selectedCompany: ''
+};
 
 class CreateStaff extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: '',
-      position: '',
-      experience: '',
-      skills: '',
-      selectedCompany: '',
+      ...EMPTY_FORM_STATE,
       companiesList: []
     };
 
@@ -35,15 +40,24 @@ class CreateStaff extends Component {
   }
 
   componentDidMount() {
-    const url = `${serverRoute}/company/list`,
+    const url = `${serverUrl}/company/list`,
       options = {
         credentials: 'include'
       };
 
     fetch(url, options)
-      .then(response => {
-        response.json()
-          .then(companiesList => this.setState({ companiesList }));
+      .then(checkingStatus)
+      .then(companiesList => {
+        this.setState({ companiesList });
+      })
+      .catch(error => {
+        const headerTitle = 'Sign Out Error',
+          { showErrorDialog } = this.props;
+
+        error
+          .then(({ errorMessage }) => {
+            showErrorDialog({ errorMessage, headerTitle });
+          });
       });
   }
 
@@ -52,9 +66,26 @@ class CreateStaff extends Component {
 
     const { name, position, experience, skills, selectedCompany } = this.state,
       body = { name, position, experience, skills, id: selectedCompany },
-      url = `${serverRoute}/staff/create`;
+      url = `${serverUrl}/staff/create`;
 
-    jsonFetch(url, body);
+    jsonFetch(url, body)
+      .then(checkingStatus)
+      .then(() => {
+        const successfulMessage = 'Created',
+          { showSimpleDialog } = this.props;
+
+        showSimpleDialog(successfulMessage);
+        this.setState({ ...EMPTY_FORM_STATE });
+      })
+      .catch(error => {
+        const headerTitle = 'Create Error',
+          { showErrorDialog } = this.props;
+
+        error
+          .then(({ errorMessage }) => {
+            showErrorDialog({ errorMessage, headerTitle });
+          });
+      });
   }
 
   selectChange(event) {
@@ -71,18 +102,22 @@ class CreateStaff extends Component {
           <form className="layout-column" onSubmit={this.onSubmit}>
             <TextField label='Full Name' name='name'
               className="mlr-15"
+              autoComplete="off"
               value={name}
               onChange={event => this.setState({ name: event.target.value })} />
             <TextField label='Position' name='position'
               className="mt-20 mlr-15"
+              autoComplete="off"
               value={position}
               onChange={event => this.setState({ position: event.target.value })} />
             <TextField label='Experience' name='experience'
               className="mt-20 mlr-15"
+              autoComplete="off"
               value={experience}
               onChange={event => this.setState({ experience: event.target.value })} />
             <TextField label='Skills' name='skills'
               className="mt-20 mlr-15"
+              autoComplete="off"
               value={skills}
               onChange={event => this.setState({ skills: event.target.value })} />
             <Selector label='Company' id='company-select'
@@ -101,6 +136,14 @@ class CreateStaff extends Component {
   }
 }
 
-const mapState = state => ({ user: state.user });
+const mapState = state => ({ user: state.user }),
+  mapDispatch = dispatch => ({
+    showErrorDialog: dialogParameters => {
+      dispatch(showErrorDialog(dialogParameters));
+    },
+    showSimpleDialog: message => {
+      dispatch(showSimpleDialog(message));
+    }
+  });
 
-export default connect(mapState)(withRouter(CreateStaff));
+export default connect(mapState, mapDispatch)(CreateStaff);

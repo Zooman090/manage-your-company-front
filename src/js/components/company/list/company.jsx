@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { Grid, Button } from 'material-ui';
+import { connect } from 'react-redux';
 
-import serverRoute from '../../../../config/route';
+import { serverUrl } from '../../../../config/route';
+import { checkingStatus } from '../../helper/request';
+
+import { showErrorDialog } from '../../../actions/dialog';
+
 import StaffList from './staff-list.jsx';
 
 class Company extends Component {
@@ -18,15 +23,24 @@ class Company extends Component {
 
   showStaff() {
     const { company_id: id } = this.props,
-      url = `${serverRoute}/staff/get/${id}`,
+      url = `${serverUrl}/staff/get/${id}`,
       options = {
         credentials: 'include'
       };
 
     fetch(url, options)
-      .then(response => {
-        response.json()
-          .then(({ staffs = [] }) => this.setState({ staffList: staffs, showStaffList: true }));
+      .then(checkingStatus)
+      .then(({ staffs = [] }) => {
+        this.setState({ staffList: staffs, showStaffList: true });
+      })
+      .catch(error => {
+        const headerTitle = 'Error',
+          { showErrorDialog } = this.props;
+
+        error
+          .then(({ errorMessage }) => {
+            showErrorDialog({ errorMessage, headerTitle });
+          });
       });
   }
 
@@ -39,9 +53,10 @@ class Company extends Component {
   }
 
   get staffShowButton() {
-    const { showStaffList } = this.state;
+    const { showStaffList } = this.state,
+      { hasStaff } = this.props;
 
-    return !showStaffList ? <Grid container justify={'center'}>
+    return !showStaffList && hasStaff ? <Grid container justify={'center'}>
       <Button className="staff-button mt-20"
         target="_blank"
         onClick={this.showStaff}
@@ -63,16 +78,16 @@ class Company extends Component {
   render() {
     const { name, type, address } = this.props,
       { showStaffList } = this.state,
-      customClass = `company-info ${showStaffList ? 'full-height' : 'minimal-height'}`;
+      customClass = `staff-container ${showStaffList ? 'show-staff' : 'hide-staff'}`;
 
-    return <Grid container className={customClass}
+    return <Grid container item className="company-info"
       direction={'column'}>
       <div className="company-detail-container">
         <p className="company-detail-container__text">{ name }</p>
         <p className="company-detail-container__text">Type: <span className="company-detail-container__point">{ type }</span></p>
         <p className="company-detail-container__text">Address: <span className="company-detail-container__point">{ address }</span></p>
       </div>
-      <div className="staff-container">
+      <div className={customClass}>
         { this.staffList }
       </div>
       { this.staffShowButton }
@@ -81,4 +96,11 @@ class Company extends Component {
   }
 }
 
-export default Company;
+const mapState = () => ({}),
+  mapDispatch = dispatch => ({
+    showErrorDialog: dialogParameters => {
+      dispatch(showErrorDialog(dialogParameters));
+    }
+  });
+
+export default connect(mapState, mapDispatch)(Company);

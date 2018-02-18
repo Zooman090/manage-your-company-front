@@ -3,9 +3,10 @@ import { Grid, Button, TextField } from 'material-ui';
 import { connect } from 'react-redux';
 
 import { userAuthorization } from '../../actions/user.js';
+import { showErrorDialog } from '../../actions/dialog';
 
-import serverRoute from '../../../config/route.js';
-import { jsonFetch } from '../helper/request';
+import { serverUrl } from '../../../config/route.js';
+import { jsonFetch, checkingStatus } from '../helper/request';
 
 const MIN_PASS_LENGTH = 8,
   MAX_PASS_LENGTH = 32;
@@ -33,13 +34,14 @@ class SignUp extends Component {
 
     const { firstName, lastName, password, email, confirmPassword, selectedType: role } = this.state,
       body = { firstName, lastName, password, email, role },
-      url = `${serverRoute}/sign/up`,
+      url = `${serverUrl}/sign/up`,
       passwordLength = password.length,
       lengthIsRight = passwordLength >= MIN_PASS_LENGTH && passwordLength <= MAX_PASS_LENGTH,
       passIsRight = lengthIsRight && confirmPassword === password;
 
     if (passIsRight) {
       jsonFetch(url, body)
+        .then(checkingStatus)
         .then(() => { 
           const { history, saveUserParameters } = this.props,
             userParameters = { isSign: true, role };
@@ -48,8 +50,15 @@ class SignUp extends Component {
           localStorage.setItem('myc', JSON.stringify(userParameters));
           history.push('/');
         })
-        .catch(() => {
-          this.props.history.push('/');
+        .catch(error => {
+          const headerTitle = 'Sign Up Error',
+            { showErrorDialog } = this.props;
+
+          error
+            .then(({ errorMessage }) => {
+              showErrorDialog({ errorMessage, headerTitle });
+              history.push('/');
+            });
         });
     } else if (lengthIsRight) {
       this.setState({
@@ -112,6 +121,9 @@ const mapState = () => ({}),
   mapDispatch = dispatch => ({
     saveUserParameters: userParameters => {
       dispatch(userAuthorization(userParameters));
+    },
+    showErrorDialog: dialogParameters => {
+      dispatch(showErrorDialog(dialogParameters));
     }
   });
 
