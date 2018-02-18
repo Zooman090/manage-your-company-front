@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button } from 'material-ui';
+import PropTypes from 'prop-types';
 
 import { makeEmptyDialog } from '../actions/dialog';
 
-let i = 0;
+const propTypes = {
+  dialog: PropTypes.object
+};
 
 const AUTOMATICALY_CLOSE_TIME = 5000,
   ANIMATION_DURATION = 400;
@@ -53,8 +56,7 @@ class Dialog extends Component {
   }
 
   get simple() {
-    const { message } = this.props.dialog,
-      { hide } = this.state;
+    const { message } = this.props.dialog;
 
     return <div className="simple-dialog">
       <span className="simple-dialog__message">{message}</span>
@@ -63,7 +65,6 @@ class Dialog extends Component {
 
   get full() { //TODO: would completed when will needed
     const { headerTitle, message, yesBtn, noBtn, action } = this.props.dialog,
-      { hide } = this.state,
       closeBtn = () => {
         this.setState({ hide: false });
       };
@@ -80,8 +81,7 @@ class Dialog extends Component {
   }
 
   get error() {
-    const { headerTitle, errorMessage } = this.props.dialog,
-      { hide } = this.state;
+    const { headerTitle, errorMessage } = this.props.dialog;
 
     return <div className="error-dialog layout-inline-column">
       <span className="error-dialog__header">{headerTitle}</span>
@@ -112,5 +112,7 @@ const mapState = ({ dialog }) => ({
       dispatch(makeEmptyDialog());
     }
   });
+
+Dialog.propTypes = propTypes;
 
 export default connect(mapState, mapDispatch)(Dialog);

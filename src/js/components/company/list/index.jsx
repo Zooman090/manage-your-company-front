@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid } from 'material-ui';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { refreshCompaniesList } from '../../../actions/company';
 import { showErrorDialog } from '../../../actions/dialog';
@@ -10,6 +11,10 @@ import { serverUrl } from '../../../../config/route';
 import { checkingStatus } from '../../helper/request';
 
 import Company from './company';
+
+const propTypes = {
+  companiesList: PropTypes.array
+};
 
 class CompaniesList extends Component {
   componentDidMount() {
@@ -60,5 +65,7 @@ const mapState = state => ({
       dispatch(showErrorDialog(dialogParameters));
     }
   });
+
+CompaniesList.propTypes = propTypes;
 
 export default connect(mapState, mapDispatch)(CompaniesList);

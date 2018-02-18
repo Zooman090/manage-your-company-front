@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, Button } from 'material-ui';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { serverUrl } from '../../../../config/route';
 import { checkingStatus } from '../../helper/request';
@@ -8,6 +9,13 @@ import { checkingStatus } from '../../helper/request';
 import { showErrorDialog } from '../../../actions/dialog';
 
 import StaffList from './staff-list.jsx';
+
+const propsTypes = {
+  hasStaff: PropTypes.number,
+  name: PropTypes.string,
+  type: PropTypes.string,
+  address: PropTypes.string
+};
 
 class Company extends Component {
   constructor(props) {
@@ -102,5 +110,7 @@ const mapState = () => ({}),
       dispatch(showErrorDialog(dialogParameters));
     }
   });
+
+Company.propTypes = propsTypes;
 
 export default connect(mapState, mapDispatch)(Company);

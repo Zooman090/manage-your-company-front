@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { Grid } from 'material-ui';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Search from '../search';
 import CompaniesList from '../company/list';
+
+const propTypes = {
+  user: PropTypes.object
+};
 
 class Main extends Component {
   get pageContent() {
@@ -38,5 +43,7 @@ class Main extends Component {
 const mapState = ({ user }) => ({
   user
 });
+
+Main.propTypes = propTypes;
 
 export default connect(mapState)(Main);
