@@ -1,4 +1,4 @@
-export const securityFetch = (url, options) => {
+export const securityFetch = (url, options) => {//TODO: Do I need that
   return new Promise((resolve, reject) => {
     const defaultHeader = {
       // 'Authorization': `Basic ${}`,
@@ -35,3 +35,5 @@ export const jsonFetch = (url, body) => {
 
   return fetch(url, options);
 };
+
+export const checkingStatus = response => (response.ok ? response.json() : Promise.reject(response.json()));

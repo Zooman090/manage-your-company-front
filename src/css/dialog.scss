@@ -11,6 +11,7 @@ $simpleBcgColor: rgba(79, 79, 209, 0.83);
   transition: 1s linear;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 999;
 }
 
 .hidden-dialog-container {

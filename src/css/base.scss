@@ -12,6 +12,7 @@ body {
   margin: 0;
   font-family: 'Robot';
   background-color: $main-bcg;
+  padding: 0 !important;// fix material behavior when work with selector
 }
 
 div.MuiGrid-typeContainer-1 {

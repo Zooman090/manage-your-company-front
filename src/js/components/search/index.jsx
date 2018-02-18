@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { saveCompanySearchParametrs } from '../../actions/search';
 
 import Selector from '../selector';
-import Input from '../input/input';
 
 class Search extends Component {
   constructor(props) {
@@ -24,20 +23,22 @@ class Search extends Component {
 
   selectFilterType(event) {
     const selectedType = event.target.value,
-      { keyword } = this.state;
+      { keyword } = this.state,
+      { filterComapnies } = this.props;
 
     this.setState({ selectedType });
 
-    this.props.filterComapnies(keyword.toLocaleLowerCase(), selectedType);
+    filterComapnies(keyword.toLocaleLowerCase(), selectedType);
   }
 
   changeKeyword(event) {
     const keyword = event.target.value.toLocaleLowerCase(),
-      { selectedType } = this.state;
+      { selectedType } = this.state,
+      { filterComapnies } = this.props;
 
     this.setState({ keyword });
 
-    this.props.filterComapnies(keyword, selectedType);
+    filterComapnies(keyword, selectedType);
   }
 
   render() {

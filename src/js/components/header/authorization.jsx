@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import serverRoute, { siteUrl } from '../../../config/route';
-import { securityFetch } from '../helper/request';
+import { serverUrl, siteUrl } from '../../../config/route';
+import { securityFetch, checkingStatus } from '../helper/request';
 import { userAuthorization } from '../../actions/user.js';
+import { showErrorDialog } from '../../actions/dialog';
 
 class Authorization extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class Authorization extends Component {
   }
 
   signOut() {
-    const url = `${serverRoute}/sign/out`;
+    const url = `${serverUrl}/sign/out`;
     const options = {
       method: 'POST',
       headers: {
@@ -23,17 +24,24 @@ class Authorization extends Component {
     };
 
     securityFetch(url, options)
-      .then(response => {
-        response.json()
-          .then(() => {
-            const { history, saveUserParameters } = this.props,
-              userParameters = { isSign: false, role: 'guest' };
+      .then(checkingStatus)
+      .then(() => {
+        const { history, saveUserParameters } = this.props,
+          userParameters = { isSign: false, role: 'guest' };
 
-            localStorage.setItem('myc', '');
+        localStorage.setItem('myc', '');
 
-            history.push('/');
+        history.push('/');
 
-            saveUserParameters(userParameters);
+        saveUserParameters(userParameters);
+      })
+      .catch(error => {
+        const headerTitle = 'Sign Out Error',
+          { showErrorDialog } = this.props;
+
+        error
+          .then(({ errorMessage }) => {
+            showErrorDialog({ errorMessage, headerTitle });
           });
       });
   }
@@ -65,6 +73,9 @@ const mapState = state => ({
   mapDispatch = dispatch => ({
     saveUserParameters: userParameters => {
       dispatch(userAuthorization(userParameters));
+    },
+    showErrorDialog: dialogParameters => {
+      dispatch(showErrorDialog(dialogParameters));
     }
   });
 

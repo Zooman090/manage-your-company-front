@@ -4,7 +4,7 @@ import { Grid } from 'material-ui';
 const Staff = (props) => {
   const { staffs } = props;
 
-  return staffs.map(({ name, position, experience, skills, company_id: id }) => <Grid container className="staff-info" key={`${id}-company`}
+  return staffs.map(({ name, position, experience, skills }, index) => <Grid container className="staff-info" key={`${index}-staff-item`}
     direction={'column'}>
     <p className="staff-info__point-text">{ name }</p>
     <p className="staff-info__point-text">Position: <span className="staff-info__point-main-text">{ position }</span></p>
