@@ -1,3 +1,5 @@
-export const serverUrl = 'http://localhost:8008';
+const isProduction = process.env.NODE_ENV === 'production';
 
-export const siteUrl = 'http://localhost:8080';
+export const serverUrl = isProduction ? 'https://fathomless-basin-64420.herokuapp.com' : 'http://localhost:8008';
+
+export const siteUrl = isProduction ? '' : 'http://localhost:8080';
