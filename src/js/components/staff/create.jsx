@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Grid, TextField } from 'material-ui';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { jsonFetch, checkingStatus } from '../helper/request';
 import { serverUrl } from '../../../config/route';
@@ -8,6 +9,10 @@ import { serverUrl } from '../../../config/route';
 import { showErrorDialog, showSimpleDialog } from '../../actions/dialog';
 
 import Selector from '../selector';
+
+const propTypes = {
+  user: PropTypes.object
+};
 
 const EMPTY_FORM_STATE = {
   name: '',
@@ -145,5 +150,7 @@ const mapState = state => ({ user: state.user }),
       dispatch(showSimpleDialog(message));
     }
   });
+
+CreateStaff.propTypes = propTypes;
 
 export default connect(mapState, mapDispatch)(CreateStaff);

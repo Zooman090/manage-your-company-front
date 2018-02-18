@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Grid, Menu, MenuItem, Button } from 'material-ui';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  user: PropTypes.object
+};
 
 class GlobalMenu extends Component {
   constructor(props) {
@@ -59,7 +64,6 @@ class GlobalMenu extends Component {
             aria-haspopup="true"
             onClick={this.handleClick}
           >
-
             Create
           </Button>
           <Menu
@@ -80,5 +84,7 @@ class GlobalMenu extends Component {
 const mapState = state => ({
   user: state.user
 });
+
+GlobalMenu.propTypes = propTypes;
 
 export default connect(mapState)(withRouter(GlobalMenu));

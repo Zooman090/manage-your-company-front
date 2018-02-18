@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { serverUrl, siteUrl } from '../../../config/route';
 import { securityFetch, checkingStatus } from '../helper/request';
 import { userAuthorization } from '../../actions/user.js';
 import { showErrorDialog } from '../../actions/dialog';
+
+const propTypes = {
+  user: PropTypes.object
+};
 
 class Authorization extends Component {
   constructor(props) {
@@ -78,5 +83,7 @@ const mapState = state => ({
       dispatch(showErrorDialog(dialogParameters));
     }
   });
+
+Authorization.propTypes = propTypes;
 
 export default connect(mapState, mapDispatch)(withRouter(Authorization));

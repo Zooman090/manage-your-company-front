@@ -1,5 +1,10 @@
 import React from 'react';
 import { Grid } from 'material-ui';
+import PropTypes from 'prop-types';
+
+const propsTypes = {
+  staffs: PropTypes.object
+};
 
 const Staff = (props) => {
   const { staffs } = props;
@@ -12,5 +17,7 @@ const Staff = (props) => {
     <p className="staff-info__point-text">Skills: <span className="staff-info__point-main-text">{ skills }</span></p>
   </Grid>);
 };
+
+Staff.propsTypes = propsTypes;
 
 export default Staff;

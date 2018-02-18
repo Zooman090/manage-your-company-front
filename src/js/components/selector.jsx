@@ -3,6 +3,15 @@ import { InputLabel } from 'material-ui/Input';
 import { MenuItem } from 'material-ui/Menu';
 import { FormControl } from 'material-ui';
 import Select from 'material-ui/Select';
+import PropTypes from 'prop-types';
+
+const propTypes = {
+  label: PropTypes.string,
+  id: PropTypes.number,
+  value: PropTypes.array,
+  onChange: PropTypes.func,
+  className: PropTypes.string
+};
 
 class Selector extends Component {
   get items() {
