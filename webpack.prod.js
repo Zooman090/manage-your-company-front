@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const paths = {
   DIST: path.resolve(__dirname, 'dist'),
@@ -16,6 +17,7 @@ module.exports = merge(common, {
     new HtmlWebpackPlugin({
       template: path.join(paths.SRC, 'index.html')
     }),
+    new ExtractTextPlugin('main.css'),
     new UglifyJSPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')

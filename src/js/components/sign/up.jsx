@@ -77,7 +77,7 @@ class SignUp extends Component {
     const { firstName, lastName, email, password, confirmPassword, selectedType, confirmPasswordIsRight, passwordIsRight } = this.state;
 
     return (
-      <Grid container justify="center" className="sign-up-container">
+      <Grid container justify="center" className="sign-up-container" spacing={0}>
         <form className="layout-column mt-20 sign-up-form" onSubmit={this.signUp}>
           <TextField label="First Name" type='text' name="firstName"
             className="mt-20"

@@ -1,9 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
+import { createHashHistory } from 'history';
 
-import './css/app.scss';
+import './styles/app.scss';
 
 import { createStore, applyMiddleware, compose } from 'redux';
 /* eslint-disable no-underscore-dangle */
@@ -23,16 +24,17 @@ import reducer from './js/reducers/index.js';
 import localStorageLoad from './js/middleware/local-storage-load';
 
 const store = createStore(reducer, composeEnhancers(applyMiddleware(localStorageLoad)));
+const history = createHashHistory();
 
 store.dispatch({ type: 'INIT' });
 
 render(
-  <Provider store={ store }>
-    <Router>
+  <Provider store={store}>
+    <Router history={history}>
       <div>
         <Dialog />
         <Header />
-        <Route exact path="/" component={Main} />
+        <Route exact path="manage-your-company-front/" component={Main} />
         <Route path="/company-create" component={CreateCompany} />
         <Route path="/staff-create" component={CreateStaff} />
         <Route path="/sign-up" component={SignUp} />

@@ -89,7 +89,8 @@ class Company extends Component {
       customClass = `staff-container ${showStaffList ? 'show-staff' : 'hide-staff'}`;
 
     return <Grid container item className="company-info"
-      direction={'column'}>
+      direction={'column'}
+      spacing={0}>
       <div className="company-detail-container">
         <p className="company-detail-container__text">{ name }</p>
         <p className="company-detail-container__text">Type: <span className="company-detail-container__point">{ type }</span></p>

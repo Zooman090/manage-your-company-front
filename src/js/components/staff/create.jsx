@@ -101,7 +101,7 @@ class CreateStaff extends Component {
     const { name, position, experience, skills, selectedCompany, companiesList } = this.state;
 
     return (
-      <Grid container justify={'center'} alignItems={'center'}>
+      <Grid container justify={'center'} alignItems={'center'} spacing={0}>
         <Grid item className="create-container"
           lg={4} sm={6} xs={12}>
           <form className="layout-column" onSubmit={this.onSubmit}>

@@ -17,7 +17,8 @@ class CreateCompany extends Component {
   render() {
     return (
       <Grid container
-        justify={'center'}>
+        justify={'center'}
+        spacing={0}>
         <CreateForm />
       </Grid>
     );

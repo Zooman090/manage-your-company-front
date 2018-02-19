@@ -59,7 +59,8 @@ class CreateForm extends Component {
     const { name, type, address } = this.state;
 
     return (
-      <Grid item className="create-container">
+      <Grid item className="create-container"
+        spacing={0}>
         <form className="layout-column mlr-15" onSubmit={this.onSubmit}>
           <TextField label='Name' name='name'
             autoComplete="off"
