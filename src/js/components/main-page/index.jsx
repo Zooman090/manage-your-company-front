@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import Search from '../search';
+import Guest from './guest';
 import CompaniesList from '../company/list';
 
 const propTypes = {
@@ -24,7 +25,7 @@ class Main extends Component {
       xs={8}>
       <Search {...filter} />
       <CompaniesList />
-    </Grid> : null;
+    </Grid> : <Guest />;
   }
 
   render() {
