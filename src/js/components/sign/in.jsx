@@ -78,9 +78,12 @@ class SignIn extends Component {
       <Grid container className="sign-in-container" spacing={0}>
         <form className="sign-in-form layout-column" onSubmit={this.signIn}>
           <TextField label="Email" type='email' name='email'
+            required={true}
+            autoComplete="off"
             value={email}
             onChange={this.typeEmail} />
           <TextField label="Password" type='password' name='password'
+            required={true}
             value={password}
             onChange={this.typePassword} />
           <Button className="sign-in-btn mt-20" type='submit' color='primary' raised="true">

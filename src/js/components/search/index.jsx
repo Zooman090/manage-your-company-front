@@ -49,15 +49,14 @@ class Search extends Component {
       <Grid container
         wrap={'nowrap'}
         alignItems={'center'}
-        className="search-container" 
-        spacing={0}>
-        <Grid item xs={8} spacing={0}>
+        className="search-container">
+        <Grid item xs={8}>
           <TextField label="search" type='text' name="search"
             className="width-100-percent"
             value={keyword}
             onChange={this.changeKeyword} />
         </Grid>
-        <Grid item xs={4} spacing={0}>
+        <Grid item xs={4}>
           <Selector item label='search by' id='company-select'
             className='width-100-percent'
             value={selectedType}

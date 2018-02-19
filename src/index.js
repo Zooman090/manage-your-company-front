@@ -17,7 +17,7 @@ import reducer from './js/reducers/index.js';
 import localStorageLoad from './js/middleware/local-storage-load';
 
 const store = createStore(reducer, composeEnhancers(applyMiddleware(localStorageLoad)));
-const history = createHashHistory();
+const history = createHashHistory();//TODO: replace by BrowserHistory
 
 store.dispatch({ type: 'INIT' });
 

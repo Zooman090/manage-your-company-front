@@ -63,15 +63,18 @@ class CreateForm extends Component {
         spacing={0}>
         <form className="layout-column mlr-15" onSubmit={this.onSubmit}>
           <TextField label='Name' name='name'
+            required={true}
             autoComplete="off"
             value={name}
             onChange={event => this.setState({ name: event.target.value }) } />
           <TextField label='Type' name='type'
+            required={true}
             autoComplete="off"
             className="mt-20"
             value={type}
             onChange={event => this.setState({ type: event.target.value }) } />
           <TextField label='Address' name='address'
+            required={true}
             autoComplete="off"
             className="mt-20"
             value={address}
