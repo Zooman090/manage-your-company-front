@@ -3,7 +3,7 @@ import { Grid, Button } from 'material-ui';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { serverUrl } from '../../../../config/route';
+import { serverUrl } from '../../../../constants/route';
 import { checkingStatus } from '../../helper/request';
 
 import { showErrorDialog } from '../../../actions/dialog';

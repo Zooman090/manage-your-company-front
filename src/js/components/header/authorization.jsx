@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { serverUrl, siteUrl } from '../../../config/route';
+import { serverUrl, siteUrl } from '../../../constants/route';
 import { securityFetch, checkingStatus } from '../helper/request';
 import { userAuthorization } from '../../actions/user.js';
 import { showErrorDialog } from '../../actions/dialog';

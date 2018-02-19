@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { jsonFetch, checkingStatus } from '../helper/request';
-import { serverUrl } from '../../../config/route';
+import { serverUrl } from '../../../constants/route';
 
 import { showErrorDialog, showSimpleDialog } from '../../actions/dialog';
 

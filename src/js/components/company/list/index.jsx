@@ -7,7 +7,7 @@ import { refreshCompaniesList } from '../../../actions/company';
 import { showErrorDialog } from '../../../actions/dialog';
 import { filteredCompanies } from '../../../selectors/search';
 
-import { serverUrl } from '../../../../config/route';
+import { serverUrl } from '../../../../constants/route';
 import { checkingStatus } from '../../helper/request';
 
 import Company from './company';
