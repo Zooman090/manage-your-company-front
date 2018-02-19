@@ -106,26 +106,31 @@ class CreateStaff extends Component {
           lg={4} sm={6} xs={12}>
           <form className="layout-column" onSubmit={this.onSubmit}>
             <TextField label='Full Name' name='name'
+              required={true}
               className="mlr-15"
               autoComplete="off"
               value={name}
               onChange={event => this.setState({ name: event.target.value })} />
             <TextField label='Position' name='position'
+              required={true}
               className="mt-20 mlr-15"
               autoComplete="off"
               value={position}
               onChange={event => this.setState({ position: event.target.value })} />
             <TextField label='Experience' name='experience'
+              required={true}
               className="mt-20 mlr-15"
               autoComplete="off"
               value={experience}
               onChange={event => this.setState({ experience: event.target.value })} />
             <TextField label='Skills' name='skills'
+              required={true}
               className="mt-20 mlr-15"
               autoComplete="off"
               value={skills}
               onChange={event => this.setState({ skills: event.target.value })} />
             <Selector label='Company' id='company-select'
+              required={true}
               value={selectedCompany}
               onChange={this.selectChange}
               items={companiesList}

@@ -12,7 +12,7 @@ import SignIn from './sign/in';
 const Root = () => <div>
   <Dialog />
   <Header />
-  <Route exact path="manage-your-company-front/" component={Main} />
+  <Route exact path="/" component={Main} />
   <Route path="/company-create" component={CreateCompany} />
   <Route path="/staff-create" component={CreateStaff} />
   <Route path="/sign-up" component={SignUp} />
