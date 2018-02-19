@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { userAuthorization } from '../../actions/user.js';
 import { showErrorDialog } from '../../actions/dialog';
 
-import { serverUrl } from '../../../config/route.js';
+import { serverUrl } from '../../../constants/route.js';
 import { jsonFetch, checkingStatus } from '../helper/request';
 
 const MIN_PASS_LENGTH = 8,

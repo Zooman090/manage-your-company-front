@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Grid, TextField } from 'material-ui';
 import { connect } from 'react-redux';
 
-import { serverUrl, siteUrl } from '../../../config/route.js';
+import { serverUrl, siteUrl } from '../../../constants/route.js';
 import { securityFetch, checkingStatus } from '../helper/request';
 
 import { userAuthorization } from '../../actions/user.js';

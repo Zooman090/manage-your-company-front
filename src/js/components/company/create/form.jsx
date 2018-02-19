@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { showErrorDialog, showSimpleDialog } from '../../../actions/dialog';
 
-import { serverUrl } from '../../../../config/route';
+import { serverUrl } from '../../../../constants/route';
 import { jsonFetch, checkingStatus } from '../../helper/request';
 
 const EMPTY_FORM_STATE = {
