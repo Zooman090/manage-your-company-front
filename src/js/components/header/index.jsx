@@ -11,7 +11,8 @@ export default class Header extends Component {
       <Grid
         container
         justify="space-between"
-        className="header-container">
+        className="header-container"
+        spacing={0}>
         <Link className="decoration-none" to='/'><p className="header-text">MYCs</p></Link>
         <GlobalMenu />
         <Authorization />

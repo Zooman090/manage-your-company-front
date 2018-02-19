@@ -47,7 +47,7 @@ class CompaniesList extends Component {
 
   render() {
     return (
-      <Grid container className="layout-column company-list-container">
+      <Grid container className="layout-column company-list-container" spacing={0}>
         { this.list() }
       </Grid>
     );

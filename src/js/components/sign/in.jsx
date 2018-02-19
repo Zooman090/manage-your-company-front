@@ -75,7 +75,7 @@ class SignIn extends Component {
     const { email, password } = this.state;
 
     return (
-      <Grid container className="sign-in-container">
+      <Grid container className="sign-in-container" spacing={0}>
         <form className="sign-in-form layout-column" onSubmit={this.signIn}>
           <TextField label="Email" type='email' name='email'
             value={email}

@@ -9,8 +9,10 @@ const propsTypes = {
 const Staff = (props) => {
   const { staffs } = props;
 
-  return staffs.map(({ name, position, experience, skills }, index) => <Grid container className="staff-info" key={`${index}-staff-item`}
-    direction={'column'}>
+  return staffs.map(({ name, position, experience, skills }, index) => <Grid container className="staff-info"
+    key={`${index}-staff-item`}
+    direction={'column'}
+    spacing={0}>
     <p className="staff-info__point-text">{ name }</p>
     <p className="staff-info__point-text">Position: <span className="staff-info__point-main-text">{ position }</span></p>
     <p className="staff-info__point-text">Experience: <span className="staff-info__point-main-text">{ experience }</span></p>

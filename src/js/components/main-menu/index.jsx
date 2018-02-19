@@ -56,7 +56,8 @@ class GlobalMenu extends Component {
     return (
       <Grid
         className="header-menu"
-        container>
+        container
+        spacing={0}>
         <div className="menu-container">
           <Button
             className="header-menu__point"

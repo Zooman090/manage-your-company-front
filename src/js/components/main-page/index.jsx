@@ -32,7 +32,8 @@ class Main extends Component {
       <div className="page-container">
         <Grid className="container-for-search"
           container
-          justify={'center'}>
+          justify={'center'}
+          spacing={0}>
           {this.pageContent}
         </Grid>
       </div>
